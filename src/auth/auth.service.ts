@@ -19,7 +19,8 @@ export class AuthService {
 
 	async login({ dataLogin, password }: LoginDto) {
 		const user = await this.validationUser(dataLogin, password)
-		return user
+		const userRR = this.returnUserData(user)
+		return userRR
 	}
 
 	async register({ email, fullName, userName, password }: RegisterhDto) {
@@ -78,7 +79,6 @@ export class AuthService {
 		} else {
 			user = await this.UserModel.findOne({ userName: dataLogin })
 		}
-		console.log(user)
 		if (!user) throw new UnauthorizedException('User not found')
 
 		const isValidPass = await compare(password, user.password)
