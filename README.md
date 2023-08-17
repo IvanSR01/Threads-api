@@ -50,18 +50,18 @@ $ npm run start:prod
 ### Login - /auth/login
 
 Request example:
+
 ```typescript
 axios({
 	url: `${baseUrl}/auth/login`,
 	method: 'post',
 	data: {
-	   dataLogin: 'emal@email.ru',
- 	   password: '1234256'
-	}
+		dataLogin: 'emal@email.ru',
+		password: '1234256',
+	},
 })
-
-
 ```
+
 Response example
 
 ```typescript
@@ -80,23 +80,24 @@ Response example
 
 
 ```
+
 ### Register - /auth/register
 
 Request example:
+
 ```typescript
 axios({
 	url: `${baseUrl}/auth/register`,
 	method: 'post',
 	data: {
-           "email": "e2mal@email.ru",
-           "fullName": "i22van N2elson",
-           "userName":"s12ete",
-           "password": "1234256"
-	}
+		email: 'e2mal@email.ru',
+		fullName: 'i22van N2elson',
+		userName: 's12ete',
+		password: '1234256',
+	},
 })
-
-
 ```
+
 Response example
 
 ```typescript
@@ -115,13 +116,48 @@ Response example
 
 
 ```
+
+### Get new token - /auth/login/access-token
+
+Request example:
+
+```typescript
+axios({
+	url: `${baseUrl}/auth/login/access-token`,
+	method: 'post',
+	data: {
+		refreshToken:
+			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGRiNGQ4MmZkZjY3N2YyNTExNjUzZWIiLCJpYXQiOjE2OTIwOTM4MjYsImV4cCI6MTY5MzM4OTgyNn0.5DyHOG0jTUt0zdtZ7gq6BNoQg4fLEY_MHXJrGKL61yc',
+	},
+})
+```
+
+Response example
+
+```typescript
+
+{
+	"user": {
+		"_id": "64dcbdcd34c5002d07741cb7",
+		"email": "e2mal@email.ru",
+		"fullName": "i22van N2elson",
+		"userName": "s12ete",
+		"isAdmin": false
+	},
+		"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGRiNGQ4MmZkZjY3N2YyNTExNjUzZWIiLCJpYXQiOjE2OTIwOTQyMzEsImV4cCI6MTY5MjA5NzgzMX0.U2Je0ldGg4FC_vr_g8lHkdofiQPpMVTALurO88R29Hc",
+	  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGRiNGQ4MmZkZjY3N2YyNTExNjUzZWIiLCJpYXQiOjE2OTIwOTQyMzEsImV4cCI6MTY5MzM5MDIzMX0.Dawp6EaUw11yqRT2erIApQ966P1oTEVXyFn2OIhKhgg"
+}
+
+
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
 
-- Author -  [Nelson](https://github.com/zxcivan07)
+- Author - [Nelson](https://github.com/zxcivan07)
 
 ## License
 
