@@ -8,7 +8,7 @@ import {
 import { UserModel } from 'src/user/user.model'
 import { JwtService } from '@nestjs/jwt'
 import { genSalt, hash, compare } from 'bcryptjs'
-import { AuthDto } from './dto/auth.dto'
+import { LoginDto, RegisterhDto } from './dto/auth.dto'
 import { RefreshTokenDto } from './dto/refreshToken.dto'
 @Injectable()
 export class AuthService {
@@ -17,12 +17,12 @@ export class AuthService {
 		private readonly jwtService: JwtService
 	) {}
 
-	async login({ dataLogin, password }: AuthDto) {
+	async login({ dataLogin, password }: LoginDto) {
 		const user = await this.validationUser(dataLogin, password)
 		return user
 	}
 
-	async register({ email, fullName, userName, password }: AuthDto) {
+	async register({ email, fullName, userName, password }: RegisterhDto) {
 		const oldUser =
 			(await this.findByEmail(email)) ||
 			(await this.UserModel.findOne({ userName: userName }))
