@@ -45,21 +45,34 @@ $ npm run dev
 $ npm run start:prod
 ```
 
+## Requests
+
+### Login - /auth/login
+
+Request example:
 ```typescript
-"_id": "64dcbda634c5002d07741cb1",
-	"userName": "sete",
-	"fullName": "ilya N2elson",
+axios({
+	url: `${baseUrl}/auth/login`,
+	method: 'post',
+	data: {
+	   dataLogin: 'emal@email.ru',
+ 	   password: '1234256'
+})
+
+
+```
+Response example
+
+```typescript
+
+{
+	"_id": "64dcbda634c5002d07741cb1",
 	"email": "emal@email.ru",
-	"password": "$2a$10$np6HBn/oZ6Aq1IvK3PyIDuxpYEDRbqdeh5Dlj4au.iJ8WqD5jH1u6",
-	"img": "uploads/Avatar/defaultAvatar.jpg",
-	"isAdmin": false,
-	"alerts": [],
-	"likes": [],
-	"createdAt": "2023-08-16T12:14:30.614Z",
-	"updatedAt": "2023-08-16T17:27:33.889Z",
-	"__v": 14,
-	"sub": []
+	"fullName": "ilya N2elson",
+	"userName": "sete",
+	"isAdmin": false
 }
+
 
 ```
 
