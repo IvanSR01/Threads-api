@@ -46,6 +46,21 @@ $ npm run start:prod
 ```
 
 ```typescript
+"_id": "64dcbda634c5002d07741cb1",
+	"userName": "sete",
+	"fullName": "ilya N2elson",
+	"email": "emal@email.ru",
+	"password": "$2a$10$np6HBn/oZ6Aq1IvK3PyIDuxpYEDRbqdeh5Dlj4au.iJ8WqD5jH1u6",
+	"img": "uploads/Avatar/defaultAvatar.jpg",
+	"isAdmin": false,
+	"alerts": [],
+	"likes": [],
+	"createdAt": "2023-08-16T12:14:30.614Z",
+	"updatedAt": "2023-08-16T17:27:33.889Z",
+	"__v": 14,
+	"sub": []
+}
+
 ```
 
 ## Support
