@@ -26,4 +26,7 @@ export class ThreadsModel extends TimeStamps {
 
 	@prop({default: []})
 	comment: Ref<CommentModel>[]
+
+	@prop({ default: 'mount' })
+	status: 'mount' | 'update'
 }

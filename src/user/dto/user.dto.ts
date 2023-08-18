@@ -9,4 +9,8 @@ export class UpdateDto {
 	password?: string
 
 	isAdmin?: boolean
+
+	description?: string
+
+	img?: string
 }

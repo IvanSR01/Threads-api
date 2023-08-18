@@ -46,6 +46,10 @@ export class UserService {
 
 			if (dto.fullName) user.fullName = dto.fullName
 
+			if (dto.description) user.description = dto.description
+
+			if (dto.img) user.img = dto.img
+
 			await user.save()
 			return { success: true }
 		}
@@ -61,19 +65,23 @@ export class UserService {
 			if (String(item._id) === String(subId)) isSub = true
 		})
 		if (isSub) {
+			subUser.subCount = subUser.subCount - 1
 			if (user.sub.length > 1) {
 				user.sub.filter((item) => {
 					return item.id !== subUser.id
 				})
+				await subUser.save()
 				const doc = await user.save()
 				return doc
-			}
-			else {
+			} else {
 				user.sub = []
+				await subUser.save()
 				const doc = await user.save()
 				return doc
 			}
 		}
+		await subUser.save()
+		subUser.subCount = subUser.subCount + 1
 		user.sub.push(subUser)
 		const doc = await user.save()
 		return doc

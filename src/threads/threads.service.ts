@@ -85,6 +85,8 @@ export class ThreadsService {
 		if (imgs) {
 			thread.imgs = imgs
 		}
+
+		thread.status = 'update'
 		const doc = await thread.save()
 		return doc
 	}

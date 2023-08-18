@@ -10,6 +10,9 @@ export class UserModel extends TimeStamps {
 	@prop({ unique: true })
 	userName: string
 
+	@prop()
+	description: string
+
 	@prop({ required: true })
 	fullName: string
 
@@ -27,6 +30,9 @@ export class UserModel extends TimeStamps {
 
 	@prop({ default: [] })
 	sub: Ref<UserModel>[]
+
+	@prop({default: 0})
+	subCount: number
 
 	@prop({ default: [] })
 	alerts: Ref<AlertModel>[]
