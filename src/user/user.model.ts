@@ -31,10 +31,13 @@ export class UserModel extends TimeStamps {
 	@prop({ default: [] })
 	sub: Ref<UserModel>[]
 
-	@prop({default: 0})
+	@prop({ default: 0 })
 	subCount: number
 
-	@prop({default: []})
+	@prop({ default: [] })
+	Links: Ref<LinkModel>[]
+
+	@prop({ default: [] })
 	threads: Ref<ThreadsModel>[]
 
 	@prop({ default: [] })
@@ -42,4 +45,15 @@ export class UserModel extends TimeStamps {
 
 	@prop({ default: [] })
 	likes: Ref<ThreadsModel | CommentModel>[]
+}
+
+class LinkModel {
+	@prop()
+	img: string
+
+	@prop()
+	title: string
+
+	@prop()
+	link: string
 }

@@ -5,7 +5,6 @@ import { UserModel } from './user.model'
 import { ModelType } from '@typegoose/typegoose/lib/types'
 import { UpdateDto } from './dto/user.dto'
 import { IIds } from './user-interface'
-import { ThreadsService } from 'src/threads/threads.service'
 
 @Injectable()
 export class UserService {
@@ -49,6 +48,8 @@ export class UserService {
 			if (dto.description) user.description = dto.description
 
 			if (dto.img) user.img = dto.img
+
+			if(dto.links) user.Links = dto.links
 
 			await user.save()
 			return { success: true }
@@ -101,7 +102,8 @@ export class UserService {
 	}
 
 	async delete(id: string) {
-		return this.UserModel.findByIdAndDelete(id).exec()
+		const user = await this.UserModel.findByIdAndDelete(id).exec()
+		return user
 	}
 
 	async getCount() {

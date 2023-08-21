@@ -13,4 +13,13 @@ export class UpdateDto {
 	description?: string
 
 	img?: string
+
+	links?: ILinks[]
+}
+interface ILinks {
+	img: string
+
+	title: string
+
+	link: string
 }
