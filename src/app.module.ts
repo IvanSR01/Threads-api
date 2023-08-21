@@ -9,6 +9,7 @@ import { getMongoConfig } from './config/mongo.config'
 import { AlertModule } from './alert/alert.module';
 import { ThreadsModule } from './threads/threads.module';
 import { CommentModule } from './comment/comment.module';
+import { FilesModule } from './files/files.module'
 
 @Module({
 	imports: [
@@ -23,6 +24,7 @@ import { CommentModule } from './comment/comment.module';
 		AlertModule,
 		ThreadsModule,
 		CommentModule,
+		FilesModule
 	],
 	controllers: [AppController],
 	providers: [AppService],

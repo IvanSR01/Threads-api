@@ -13,6 +13,7 @@ import { ThreadsService } from './threads.service'
 import { Auth } from 'src/auth/decorators/auth.decorator'
 import { User } from 'src/user/decorators/user.decorator'
 import { CreateThreadDto } from './dto/thread.dto'
+import { UserModel } from 'src/user/user.model'
 
 @Controller('threads')
 export class ThreadsController {
@@ -25,6 +26,13 @@ export class ThreadsController {
 	async create(@User('_id') _id: string, @Body() dto: CreateThreadDto) {
 		return this.ThreadsService.create({ _id, ...dto })
 	}
+
+	@Get('by-author')
+	@Auth()
+	async byAuthor(@Body('_id') _id:string ){
+		return this.ThreadsService.byAuthor(_id)
+	}
+
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Put('/:threadId')

@@ -28,7 +28,7 @@ export class UserController {
 	@Get('popular')
 	@Auth()
 	async getPopular(){
-		return this.UserService.getCount()
+		return this.UserService.getPopularUser()
 	}
 
 	@Get('count')

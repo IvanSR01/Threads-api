@@ -27,6 +27,14 @@ export class ThreadsService {
 		return this.ThreadsModel.find().sort({ createAt: -1 })
 	}
 
+	async byAuthor(_id:string){
+		const threads = await this.ThreadsModel.find().populate('')
+		threads.filter((item) => {
+			item.author.id === _id
+		})
+		return threads
+	}
+
 	async byId(threadId: string) {
 		const thread = await this.ThreadsModel.findByIdAndUpdate(
 			threadId,
