@@ -5,6 +5,7 @@ import { UserModel } from './user.model'
 import { ModelType } from '@typegoose/typegoose/lib/types'
 import { UpdateDto } from './dto/user.dto'
 import { IIds } from './user-interface'
+import { ThreadsService } from 'src/threads/threads.service'
 
 @Injectable()
 export class UserService {
@@ -18,7 +19,6 @@ export class UserService {
 
 	async byId(id: string) {
 		const user = await this.UserModel.findById(id)
-
 		if (user) return user
 		throw new NotFoundException('User not found')
 	}

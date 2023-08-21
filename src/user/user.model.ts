@@ -34,6 +34,9 @@ export class UserModel extends TimeStamps {
 	@prop({default: 0})
 	subCount: number
 
+	@prop({default: []})
+	threads: Ref<ThreadsModel>[]
+
 	@prop({ default: [] })
 	alerts: Ref<AlertModel>[]
 

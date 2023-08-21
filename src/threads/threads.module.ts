@@ -28,5 +28,6 @@ import { AlertModule } from 'src/alert/alert.module'
 	],
 	providers: [ThreadsService],
 	controllers: [ThreadsController],
+	exports: [ThreadsService]
 })
 export class ThreadsModule {}
