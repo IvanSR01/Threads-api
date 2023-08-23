@@ -39,7 +39,17 @@ export class AlertService {
 			content,
 			img,
 		})
-		const doc = await alert.save()
-		return doc
+		return alert
+	}
+
+	// admin
+	async createAlertToAllUser({ title, content, img }: CreateDto) {
+		const alert = await this.create({ title, content, img })
+		const users = await this.UserModel.find()
+		users.forEach(async (item) => {
+			item.alerts.push(alert)
+			await item.save()
+		})
+		return alert
 	}
 }
