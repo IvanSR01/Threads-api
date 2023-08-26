@@ -5,11 +5,12 @@ import { ensureDir, writeFile } from 'fs-extra';
 
 @Injectable()
 export class FilesService {
-
-	async saveFiles(files: Express.Multer.File[], folder: string = 'default'): Promise<FileResponse[]>{
+	async saveFiles(
+		files: Express.Multer.File[],
+		folder: string = 'default'
+	): Promise<FileResponse[]> {
 		const uploadFolder = `${path}/uploads/${folder}`
 		await ensureDir(uploadFolder)
-
 		const res: FileResponse[] = await Promise.all(
 			files.map(async (file) => {
 				await writeFile(`${uploadFolder}/${file.originalname}`, file.buffer)
@@ -18,8 +19,8 @@ export class FilesService {
 					name: file.originalname,
 				}
 			})
-		) 
+		)
+
 		return res
 	}
-
 }
