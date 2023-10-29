@@ -7,6 +7,7 @@ import {
 	HttpCode,
 	UsePipes,
 	ValidationPipe,
+	Delete,
 } from '@nestjs/common'
 import { CommentService } from './comment.service'
 import { Auth } from 'src/auth/decorators/auth.decorator'
@@ -42,7 +43,7 @@ export class CommentController {
 		return this.CommentService.update({ _id, commentId, ...dto })
 	}
 	@Auth()
-	@Put('/:commentId')
+	@Delete('/:commentId')
 	async delete(
 		@User('_id') _id: string,
 		@Param('commentId') commentId: string
@@ -51,7 +52,7 @@ export class CommentController {
 	}
 
 	@Auth('admin')
-	@Put('/:commentId')
+	@Delete('/:commentId')
 	async deleteAdmin(@Param('commentId') commentId: string) {
 		return this.CommentService.adminDeleteComment(commentId)
 	}

@@ -5,11 +5,13 @@ import { UserModel } from './user.model'
 import { ModelType } from '@typegoose/typegoose/lib/types'
 import { UpdateDto } from './dto/user.dto'
 import { IIds } from './user-interface'
+import { ThreadsModel } from 'src/threads/threads.model'
 
 @Injectable()
 export class UserService {
 	constructor(
-		@InjectModel(UserModel) private readonly UserModel: ModelType<UserModel>
+		@InjectModel(UserModel) private readonly UserModel: ModelType<UserModel>,
+		@InjectModel(ThreadsModel) private readonly ThreadsModel: ModelType<ThreadsModel>
 	) {}
 
 	async getPopularUser() {
@@ -24,6 +26,8 @@ export class UserService {
 
 	async updateProfile(_id: string, dto: UpdateDto) {
 		const user = await this.UserModel.findById(_id)
+		
+		const threads = await this.ThreadsModel.find({author: user})
 		const isSameUser =
 			(await this.UserModel.findOne({ email: dto.email })) ||
 			(await this.UserModel.findOne({ userName: dto.userName }))
@@ -51,7 +55,15 @@ export class UserService {
 
 			if(dto.links) user.Links = dto.links
 
+			if(threads.length){
+				threads.forEach(async(item) => {
+					const thread = await this.ThreadsModel.findById(item._id)
+					thread.author = user
+					await thread.save()
+				})
+			}
 			await user.save()
+
 			return { success: true }
 		}
 		throw new NotFoundException('User not found')

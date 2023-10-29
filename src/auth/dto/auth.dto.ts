@@ -19,7 +19,7 @@ export class RegisterhDto {
 
 export class LoginDto {
 	@IsString()
-	dataLogin: string
+	login: string
 
 	@MinLength(6, { message: 'Password cannot be less than 6 characters' })
 	@IsString()

@@ -3,6 +3,7 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { UserModel } from './user.model';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
+import { ThreadsModel } from 'src/threads/threads.model';
 
 @Module({controllers: [UserController],
 	imports: [
@@ -11,6 +12,14 @@ import { UserController } from './user.controller';
 				typegooseClass: UserModel,
 				schemaOptions: {
 					collection: 'User',
+				},
+			},
+		]),
+		TypegooseModule.forFeature([
+			{
+				typegooseClass: ThreadsModel,
+				schemaOptions: {
+					collection: 'Thread',
 				},
 			},
 		]),

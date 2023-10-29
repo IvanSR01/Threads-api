@@ -38,8 +38,8 @@ export class UserController {
 
 	@Put('sub')
 	@Auth()
-	async toggleSub(@Body() data: IIds){
-		return this.UserService.toggleSub(data)
+	async toggleSub(@User('_id') _id:string, @Body('subId') subId: string){
+		return this.UserService.toggleSub({_id, subId})
 	}
 
 	@Put('toAdmin')

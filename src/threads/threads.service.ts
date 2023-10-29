@@ -46,16 +46,14 @@ export class ThreadsService {
 		return thread
 	}
 
-	async create({ _id, title, content, imgs }: CreateThreadDto) {
+	async create({ _id, content, imgs }: CreateThreadDto) {
 		const user = await this.UserModel.findById(_id).populate('')
 		const thread = new this.ThreadsModel({
 			author: user,
-			title,
 			content,
 			imgs,
 		})
 		const doc = await thread.save()
-		user.threads.push(doc)
 		const dto = {
 			title: `New alert from ${user.userName ? user.userName : user.fullName}`,
 			content: `${
@@ -78,16 +76,13 @@ export class ThreadsService {
 		return doc
 	}
 
-	async update({ _id, title, content, imgs, threadId }: UpdateThreadDto) {
+	async update({ _id, content, imgs, threadId }: UpdateThreadDto) {
 		const thread = await this.ThreadsModel.findById(threadId)
 
 		if (String(_id) !== String(thread.author._id)) {
 			throw new BadRequestException('You don t have a license')
 		}
 
-		if (title) {
-			thread.title = title
-		}
 		if (content) {
 			thread.content = content
 		}
@@ -107,26 +102,12 @@ export class ThreadsService {
 			throw new BadRequestException('You don t have a license')
 		}
 		await this.ThreadsModel.deleteOne(thread.id)
-		if (user.threads.length > 1) {
-			user.threads.filter((item) => {
-				return item._id !== thread._id
-			})
-			return thread
-		}
-		user.threads = []
 		return thread
 	}
 
 	async adminDeleteThread(threadId: string) {
 		const doc = await this.ThreadsModel.findByIdAndDelete(threadId)
 		const user = await this.UserModel.findById(doc.author._id)
-		if (user.threads.length > 1) {
-			user.threads.filter((item) => {
-				return item._id !== doc._id
-			})
-		} else {
-			user.threads = []
-		}
 		const dto = {
 			title: `New alert from admin`,
 			content: `Your thread was deleted for violation`,

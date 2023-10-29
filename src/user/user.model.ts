@@ -13,7 +13,7 @@ export class UserModel extends TimeStamps {
 	@prop()
 	description: string
 
-	@prop({ required: true })
+	@prop()
 	fullName: string
 
 	@prop({ unique: true })
@@ -36,9 +36,6 @@ export class UserModel extends TimeStamps {
 
 	@prop({ default: [] })
 	Links: Ref<LinkModel>[]
-
-	@prop({ default: [] })
-	threads: Ref<ThreadsModel>[]
 
 	@prop({ default: [] })
 	alerts: Ref<AlertModel>[]

@@ -12,8 +12,8 @@ import {
 import { ThreadsService } from './threads.service'
 import { Auth } from 'src/auth/decorators/auth.decorator'
 import { User } from 'src/user/decorators/user.decorator'
-import { CreateThreadDto } from './dto/thread.dto'
-import { UserModel } from 'src/user/user.model'
+import { CreateThreadDto, UpdateThreadDto } from './dto/thread.dto'
+import { UpdateDto } from 'src/user/dto/user.dto'
 
 @Controller('threads')
 export class ThreadsController {
@@ -35,6 +35,14 @@ export class ThreadsController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
+	@Put('/update')
+	@Auth()
+	async update(@User('_id') _id: string, @Body() dto: UpdateThreadDto) {
+		return this.ThreadsService.update({...dto, _id})
+	}
+
+	@UsePipes(new ValidationPipe())
+	@HttpCode(200)
 	@Put('/:threadId')
 	@Auth()
 	async like(@User('_id') _id: string, @Param('threadId') threadId: string) {
@@ -42,7 +50,6 @@ export class ThreadsController {
 	}
 
 	@Get('')
-	@Auth()
 	async getAll() {
 		return this.ThreadsService.getAll()
 	}

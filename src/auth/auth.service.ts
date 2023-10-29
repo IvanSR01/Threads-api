@@ -17,8 +17,8 @@ export class AuthService {
 		private readonly jwtService: JwtService
 	) {}
 
-	async login({ dataLogin, password }: LoginDto) {
-		const user = await this.validationUser(dataLogin, password)
+	async login({ login, password }: LoginDto) {
+		const user = await this.validationUser(login, password)
 		const tokens = await this.generatorToken(user.id)
 		return {
 			user: this.returnUserData(user),
@@ -64,9 +64,10 @@ export class AuthService {
 		const user = await this.UserModel.findById(result)
 
 		const tokens = await this.generatorToken(user.id)
+		const returnUser = this.returnUserData(user)
 
 		return {
-			user: this.returnUserData(user),
+			...returnUser,
 			...tokens,
 		}
 	}
@@ -111,6 +112,11 @@ export class AuthService {
 			fullName: user.fullName,
 			userName: user.userName,
 			isAdmin: user.isAdmin,
+			likes: user.likes,
+			img: user.img,
+			alert: user.alerts,
+			sub: user.sub,
+			subCount: user.subCount
 		}
 	}
 }

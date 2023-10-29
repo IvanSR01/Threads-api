@@ -9,9 +9,6 @@ export class ThreadsModel extends TimeStamps {
 	@prop()
 	author: Ref<UserModel>
 
-	@prop({ required: true })
-	title: string
-
 	@prop({required: true})
 	content: string
 
